@@ -24,7 +24,7 @@ app.listen(port, () => {
 app.post('/add/', (req, res) => {
   console.log('Fetching data from:', req.body.url);
   fetch(req.body.url)
-    //.then(response => response.json())
-    .then(data => res.send(data))
+    .then(response => response.json())
+    .then(data => res.send(data));
 });
 
