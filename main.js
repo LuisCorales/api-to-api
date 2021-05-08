@@ -1,5 +1,11 @@
 /**
  * API to get APIs
+ * 
+ * COMMANDS
+ * npm install nodejs
+ * npm install express --save
+ * npm i node-fetch --save
+ * node main.js
  */
 // Creates an Express application
 const express = require('express');
@@ -21,10 +27,18 @@ app.listen(port, () => {
 });
 
 // POST the requested API data
-app.post('/add/', (req, res) => {
-  console.log('Fetching data from:', req.body.url);
-  fetch(req.body.url)
-    .then(response => response.json())
-    .then(data => res.send(data));
+app.post('/add/', async (req, res) => {
+  try {
+    console.log('Fetching data from:', req.body.url);
+    
+    // Starts a request and awaits until it returns a promise as a Response object
+    const response = await fetch(req.body.url);
+    // Get the response and await until a JSON object is resolved
+    const data = await response.json();
+    // Send the JSON
+    res.send(data);
+  }
+  catch(e) {
+    console.log(e);
+  }
 });
-
